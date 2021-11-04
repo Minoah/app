@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123@123a
+
+  appv1:
+    image: ${DOCKER_REGISTRY-}appv1
+    build:
+      context: .
+      dockerfile: Appv1/Dockerfile
+    depends_on:
+      - db
